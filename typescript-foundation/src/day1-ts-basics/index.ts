@@ -151,6 +151,7 @@ interface User {
 }
 
 //  Enum
+// @ts-ignore
 enum Role {
   Admin = "ADMIN",
   User = "USER",
