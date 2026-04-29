@@ -3,8 +3,9 @@ import typescriptLogo from "./assets/typescript.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 
-// import "./day1-ts-basics/index.ts";
-import "./day2-js-foundation/index"
+// import "./day1-ts-basics/index";
+// import "./day2-js-foundation/index"
+import "./day3-control-flow-and-operators";
 
 const htmlStr = `
 <section id="center">
