@@ -5,4 +5,5 @@ import "./style.css";
 // import "./day3-control-flow-and-operators";
 // import "./day4-function";
 // import "./day6-oop";
-import "./day7-built-ins";
+// import "./day7-built-ins";
+import "./day8-async-and-promise"
