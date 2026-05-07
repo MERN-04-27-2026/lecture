@@ -6,4 +6,5 @@ import "./style.css";
 // import "./day4-function";
 // import "./day6-oop";
 // import "./day7-built-ins";
-import "./day8-async-and-promise"
+// import "./day8-async-and-promise";
+import "./day9-working-with-apis";

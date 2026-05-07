@@ -1,4 +1,4 @@
-console.log("day 8");
+// console.log("day 8");
 
 // const users = fetch("users api");
 // 500ms
