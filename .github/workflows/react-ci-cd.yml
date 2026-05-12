@@ -1,0 +1,82 @@
+name: React Foundation CI/CD
+
+on:
+  push:
+    branches:
+      - main
+    # Core isolation: Only trigger the pipeline when files in react-foundation change
+    paths:
+      - "react-foundation/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "react-foundation/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ==========================================
+  # Phase 1: CI (Continuous Integration) - Responsible for checking and building
+  # ==========================================
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "react-foundation/package-lock.json"
+
+      - name: Install dependencies
+        working-directory: ./react-foundation
+        run: npm ci
+
+      - name: Lint check
+        working-directory: ./react-foundation
+        run: npm run lint
+
+      # Uncomment the following lines if you have tests
+      # - name: Run tests
+      #   working-directory: ./react-foundation
+      #   run: npm test -- --run
+
+      - name: Build project
+        working-directory: ./react-foundation
+        run: npm run build
+
+      # Upload the built dist folder for GitHub Pages deployment
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./react-foundation/dist
+
+  # ==========================================
+  # Phase 2: CD (Continuous Deployment) - Only deploy when pushed to main
+  # ==========================================
+  deploy-to-pages:
+    # Ensure PRs do not trigger deployment, only merging to main will deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-and-test # Must wait for the above build to succeed before running
+    runs-on: ubuntu-latest
+
+    # Environment configuration: Corresponds to Environment settings in the GitHub repository
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Permissions required for deploying to GitHub Pages
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
