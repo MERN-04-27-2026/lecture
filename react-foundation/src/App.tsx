@@ -3,6 +3,7 @@ import Day12 from "./day12-components/Day12";
 import Day13 from "./day13-states/Day13";
 import Day14 from "./day14-inputs/Day14";
 import Day16 from "./day16-lifecycle";
+import Day17 from "./day17-more-hooks";
 
 export default function App() {
   return (
@@ -10,7 +11,8 @@ export default function App() {
       {/* <Day12 /> */}
       {/* <Day13 /> */}
       {/* <Day14 /> */}
-      <Day16 />
+      {/* <Day16 /> */}
+      <Day17 />
     </div>
   );
 }
