@@ -13,6 +13,10 @@ export default function TodoApp() {
 }
 
 function TodoForm() {
+  // let's say if todos state from TodosProvider changes
+  // then TodoForm will also re-render, because it's a consumer
+  // even tho it didn't even consume "todos"
+  // this causes unnecessary re-rendering
   const { addTodo } = useTodos();
   // if a state doesn't need to be shared with others, then make it local
   const [content, setContent] = useState("");
