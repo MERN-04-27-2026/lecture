@@ -1,19 +1,19 @@
-import { useContext, useState, type SubmitEvent } from "react";
-import TodoProvider, { TodoContext, type Todo } from "./TodoContext";
+import { useState, type SubmitEvent } from "react";
+import TodosProvider, { useTodos, type Todo } from "./TodosContext";
 
 export default function TodoApp() {
   return (
-    <TodoProvider>
-      {/* all these are children of TodoProvider */}
+    <TodosProvider>
+      {/* all these are children of TodosProvider */}
       <h2>Todo App</h2>
       <TodoForm />
       <TodoList />
-    </TodoProvider>
+    </TodosProvider>
   );
 }
 
 function TodoForm() {
-  const { addTodo } = useContext(TodoContext);
+  const { addTodo } = useTodos();
   // if a state doesn't need to be shared with others, then make it local
   const [content, setContent] = useState("");
   const handleSubmit = (e: SubmitEvent) => {
@@ -30,7 +30,7 @@ function TodoForm() {
 }
 
 function TodoList() {
-  const { todos } = useContext(TodoContext);
+  const { todos } = useTodos();
   return (
     <div>
       {todos.map((todo) => {
@@ -44,8 +44,7 @@ function Todo({ todo }: { todo: Todo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState("");
 
-  const { deleteTodo, toggleCompleteTodo, updateTodo } =
-    useContext(TodoContext);
+  const { deleteTodo, toggleCompleteTodo, updateTodo } = useTodos();
 
   const handleSave = () => {
     updateTodo(todo.id, newContent);

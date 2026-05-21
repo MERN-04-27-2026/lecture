@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 export interface Todo {
   id: string;
@@ -6,7 +6,7 @@ export interface Todo {
   completed: boolean;
 }
 
-interface TodoContextType {
+interface TodosContextType {
   todos: Todo[];
   addTodo: (content: string) => void;
   deleteTodo: (id: string) => void;
@@ -14,9 +14,9 @@ interface TodoContextType {
   toggleCompleteTodo: (id: string) => void;
 }
 
-export const TodoContext = createContext<TodoContextType>(null);
+export const TodosContext = createContext<TodosContextType>(null);
 
-export default function TodoProvider({ children }: { children: ReactNode }) {
+export default function TodosProvider({ children }: { children: ReactNode }) {
   const [todos, setTodos] = useState<Todo[]>([
     { id: crypto.randomUUID(), content: "Cook", completed: false },
   ]);
@@ -62,10 +62,14 @@ export default function TodoProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <TodoContext.Provider
+    <TodosContext.Provider
       value={{ todos, addTodo, deleteTodo, updateTodo, toggleCompleteTodo }}
     >
       {children}
-    </TodoContext.Provider>
+    </TodosContext.Provider>
   );
+}
+
+export function useTodos() {
+  return useContext(TodosContext);
 }
