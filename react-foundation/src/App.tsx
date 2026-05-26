@@ -5,6 +5,7 @@ import Day14 from "./day14-inputs/Day14";
 import Day16 from "./day16-lifecycle";
 import Day17 from "./day17-more-hooks";
 import Day19 from "./day19-context-api";
+import Playground from "./playground";
 
 export default function App() {
   return (
@@ -14,7 +15,8 @@ export default function App() {
       {/* <Day14 /> */}
       {/* <Day16 /> */}
       {/* <Day17 /> */}
-      <Day19 />
+      {/* <Day19 /> */}
+      <Playground />
     </div>
   );
 }

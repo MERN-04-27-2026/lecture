@@ -1,6 +1,6 @@
 import { Badge, Button, Card, Group, Text } from '@mantine/core';
 
-import { ProductImage } from './ProductImage';
+
 
 export const ProductCard = () => {
   return (
