@@ -8,14 +8,25 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { updateCartApi } from "../../cart/api";
+import { fetchProductById } from "../api";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
+  // how to get the params variables
+  const { id } = useParams();
 
-  const { mutate, isError, error } = useMutation({
+  const { data, isError: isProductError, error: productError, isLoading: isProductLoading } = useQuery({
+    queryKey: ["product", id],
+    enabled: !!id,
+    queryFn: () => fetchProductById(id!),
+  });
+
+  console.log(data);
+
+  const { mutate, isError: isMutationError, error: mutationError } = useMutation({
     mutationFn: updateCartApi,
     onSuccess: () => {
       console.log("successful");

@@ -14,6 +14,8 @@ const RootLayout = () => {
     >
       <Navbar />
       <main style={{ flex: 1 }}>
+        {/* connects this component to all the nested route */}
+        {/* the Outlet component is the nested route */}
         <Outlet />
       </main>
       <Footer />

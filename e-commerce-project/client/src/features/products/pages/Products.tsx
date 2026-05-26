@@ -13,6 +13,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "../../../components/ui/Spinner";
 import { fetchProducts } from "../api";
+import { useSearchParams } from "react-router-dom";
 
 const Products = () => {
   const { data, isLoading, isError, error } = useQuery({
@@ -20,6 +21,10 @@ const Products = () => {
     // you can use any data fetching method, you can use fetch, axios, or just promise
     queryFn: fetchProducts,
   });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get("category"))
+  console.log(searchParams.get("minRating"))
 
   if (isLoading) {
     return <Spinner />;

@@ -10,16 +10,20 @@ import Cart from "../features/cart/pages/Cart";
 import Login from "../features/auth/pages/Login";
 import Signup from "../features/auth/pages/Signup";
 import Settings from "../features/settings/pages/Settings";
+import AuthGuard from "../features/auth/components/AuthGuard";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    // this element will be displayed in all children components
     element: <RootLayout />,
     errorElement: <GlobalErrorPage />,
+    // nested routes
     children: [
       { index: true, element: <Home /> },
       { path: "products", element: <Products /> },
       {
+        // dynamic routing
         path: "products/:id",
         element: <ProductDetail />,
       },
@@ -27,11 +31,19 @@ export const router = createBrowserRouter([
       { path: "signup", element: <Signup /> },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <AuthGuard>
+            <Cart />
+          </AuthGuard>
+        ),
       },
       {
         path: "settings",
-        element: <Settings />,
+        element: (
+          <AuthGuard>
+            <Settings />
+          </AuthGuard>
+        ),
       },
     ],
   },

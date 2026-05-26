@@ -59,6 +59,7 @@ export const Navbar = () => {
             <Menu.Label>Account</Menu.Label>
             <Menu.Item
               leftSection={<IconSettings size={16} />}
+              // navigation programmatically
               onClick={() => navigate("/settings")}
             >
               Settings
