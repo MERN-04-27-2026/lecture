@@ -22,6 +22,7 @@ export class ConflictError extends CustomError {
     super(message, status);
   }
 }
+
 export class UnAuthorizedError extends CustomError {
   constructor(message: string = "You don't have permission", status: number = 403) {
     super(message, status);

@@ -32,6 +32,12 @@ class TodosRepository {
     return todos;
   };
 
+  // get expects a value, or else throw error
+  getById = async (id: string): Promise<Todo | undefined> => {
+    return todos.find((todo) => todo.id === id);
+  };
+
+  // ƒind: will either return the data or return null
   findById = async (id: string): Promise<Todo | undefined> => {
     return todos.find((todo) => todo.id === id);
   };
